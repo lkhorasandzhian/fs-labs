@@ -1,5 +1,5 @@
 (*
-Хорасанджян Левон, БПИ218, вариант 8.
+Khorasandzhian Levon, group 218, variant 8.
 *)
 
 // Print a table of a given function f, computed by taylor series

@@ -87,3 +87,45 @@ SumOfPositiveElems3 [-7; 9; -2; 3; 8; -6; -10; 4; -1; -4; 7; -9; 10; -3; -8; 5; 
 
 #load "four.fsx"
 open FourthDatabase
+
+let firstTrio (a, _, _) = a
+let secondTrio (_, b, _) = b
+let thirdTrio (_, _, c) = c
+
+let printQ1 =
+    query {
+        for groupNumber, students in List.sort(List.groupBy(firstTrio) studs) do
+            select (groupNumber,
+                    List.averageBy(
+                        fun (_, _, grades) ->
+                            (List.sumBy(snd) grades |> float) / (List.length grades |> float)
+                    ) students
+            )
+    } |> Seq.iter(fun (num, avg) -> printfn "|%d | %f|" num avg)
+
+printQ1
+
+let printQ2 =
+    query {
+        for abbr, fullName in subjs do
+            select(fullName, 
+                   List.filter(
+                       fun (_, _, grades) ->
+                            List.exists(fun (curAbbr, grade) -> curAbbr = abbr && grade = 2) grades
+                   ) studs |> List.length
+            )
+    } |> Seq.iter(fun (courseName, failCount) -> printfn "|%s — %d|" courseName failCount)
+
+printQ2
+
+let printQ3 =
+    query {
+        for groupNumber, students in List.sort(List.groupBy(firstTrio) studs) do
+            select (groupNumber,
+                    List.maxBy(
+                        fun (_, _, grades) -> List.maxBy(snd) grades
+                    ) students |> secondTrio
+            )
+    } |> Seq.iter(fun (num, name) -> printfn "|%d | %s|" num name)
+
+printQ3

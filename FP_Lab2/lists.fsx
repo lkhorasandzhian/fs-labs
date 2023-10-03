@@ -84,3 +84,6 @@ SumOfPositiveElems3 [-7; 9; -2; 3; 8; -6; -10; 4; -1; -4; 7; -9; 10; -3; -8; 5; 
 // Q2. For each subject, print the number of students who failed the exam (grade=2)
 // Q3. For each group, print the student with maximum total grade (any such student, if there are many)
 // eg. four.fsx - https://gist.github.com/shwars/5c2e93476f08511b4f4f2d77ce984bdf
+
+#load "four.fsx"
+open FourthDatabase
